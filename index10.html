@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Question.10</title>
+  </head>
+  <body>
+    <h3>Thank You</h3>
+    <script>
+      class Stack {
+        constructor() {
+          this.items = [];
+          this.min = null;
+        }
+        push(element) {
+          if (this.min === null || element < this.min) {
+            this.min = element;
+          }
+          this.items.push(element);
+        }
+        pop() {
+          if (this.isEmpty()) {
+            return null;
+          }
+          if (this.items[this.items.length - 1] === this.min) {
+            this.items.pop();
+            if (this.isEmpty()) {
+              this.min = null;
+            } else {
+              this.min = Math.min(...this.items);
+            }
+            return this.min;
+          }
+          return this.items.pop();
+        }
+        peek() {
+          if (this.isEmpty()) {
+            return null;
+          }
+          return this.items[this.items.length - 1];
+        }
+        isEmpty() {
+          return this.items.length === 0;
+        }
+        size() {
+          return this.items.length;
+        }
+        getMin() {
+          return this.min;
+        }
+      }
+      const stack = new Stack();
+      const input = prompt("Enter elements of the stack separated by commas:");
+      const elements = input.split(",").map((str) => parseInt(str.trim()));
+      elements.forEach((element) => stack.push(element));
+      console.log("Original stack:", stack.items);
+      alert(stack.getMin());
+    </script>
+  </body>
+</html>
